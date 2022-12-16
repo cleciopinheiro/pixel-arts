@@ -1,4 +1,5 @@
 const sectionPaleteColor = document.querySelector('#color-palette');
+const buttonRandomColor = document.querySelector('#button-random-color');
 
 // A função generatePaleteColor é responsável por criar tag div de forma dinâmica pelo JavaScript.
 // 1- Primeiro passo foi fazer um for para repitir a quantidade de div que foi pedida no requisito.
@@ -43,6 +44,9 @@ const coloredDiv = () => {
     }
   }
 };
+
+// O requisito 4 pede um botão para trocar as cores da paleta de cores. Criei o button diretamente no HTML e coloquei o id pedido. Foi preciso apenas um evento de click para o botão, já que o botão foi capturado lá no topo do código. A função do botão eu aproveitei o coloredDiv que faz exatamente oque era preciso nessa ocasião.
+buttonRandomColor.addEventListener('click', coloredDiv);
 
 window.onload = () => {
   generatePaleteColor();
