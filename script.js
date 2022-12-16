@@ -86,7 +86,23 @@ const paintPaleteLocalStorage = () => {
   }
 };
 
+// A função generatePixelBoard esta responsável por criar o quadro de pixels onde vão ser pintados. Para sua construção, segui a seguinte lógica:
+// 1- Capturei o lugar onde vai estar meus pixels;
+// 2- Fiz um for para definir a quantidade de pixels pedida no Requisito 7 (No caso foi 5 linhas e 5 colunas);
+// Para cada index foi criado a tag div (que vai ser meu pixel);
+// 4- atribui a className "pixel" para cada pixel criado a partir do for;
+// 5- Ainda no loop a pixel criada foi acrescentada ao elemento pai com o id "#pixel-board", capturado no início desta função.
+const generatePixelBoard = () => {
+  const pixelBoard = document.querySelector('#pixel-board');
+  for (let index = 0; index < 5 * 5; index += 1) {
+    const divPixel = document.createElement('div');
+    divPixel.className = 'pixel';
+    pixelBoard.appendChild(divPixel);
+  }
+};
+
 window.onload = () => {
   generatePaleteColor();
   paintPaleteLocalStorage();
+  generatePixelBoard();
 };

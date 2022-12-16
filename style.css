@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-section {
+#color-palette {
   display: flex;
   gap: 5px;
 }
@@ -13,4 +13,17 @@ section {
   height: 40px;
   width: 40px;
   border-radius: 100%;
+}
+
+#pixel-board {
+  display: inline-block;
+  columns: 5;
+  column-gap: 0;
+}
+
+.pixel {
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
+  background-color: white;
 }
