@@ -3,3 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+section {
+  display: flex;
+  gap: 5px;
+}
+
+.color {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
