@@ -101,8 +101,28 @@ const generatePixelBoard = () => {
   }
 };
 
+// A função selectedColor está responsável por selecionar a cor na paleta de cores. A lógica da função foi pensada da seguinte forma:
+// 1- Capturei todas as cores da Paleta de Cores com a className "color";
+// 2- Fiz um for para percorrer todas as cores da Paleta de Cores;
+// 3- com o index das cores percorridas pelo for coloquei um addEventListener do tipo click para ficar no aguarde da ação do usuário;
+// 4- Capturei a cor que já estava selecionada;
+// 5- Criei a seguinte condição: Se o index já estiver com a className "selected", eu quero que remova. Caso não tenha, quero adicionar a className "selected", conforme pede o requisito 9.
+const selectedColor = () => {
+  const colors = document.querySelectorAll('.color');
+  for (let index = 0; index < colors.length; index += 1) {
+    colors[index].addEventListener('click', (event) => {
+      const selected = document.querySelector('.selected');
+      if (selected) {
+        selected.classList.remove('selected');
+      }
+      event.target.classList.add('selected');
+    });
+  }
+};
+
 window.onload = () => {
   generatePaleteColor();
   paintPaleteLocalStorage();
   generatePixelBoard();
+  selectedColor();
 };

@@ -16,9 +16,9 @@
 }
 
 #pixel-board {
-  display: inline-block;
-  columns: 5;
-  column-gap: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 0fr);
+  grid-template-rows: repeat(5, 0fr);
 }
 
 .pixel {
