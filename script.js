@@ -120,9 +120,26 @@ const selectedColor = () => {
   }
 };
 
+// A função paintPixelBoard serve para pintar os pixels criados com a cor selecionada na Paleta de Cores. A lógica utilizada na função é bastante parecida com a função selectedColor, porém ao invés de "capturar o click e pegar a cor" o addEventListener foi utilizado para aplicar o backgroundColor da cor que está selecionada da função selectedColor.
+// 1- Capturei os pixels criados;
+// 2- Passei um for para percorrer todos os meus pixels;
+// 3- com o index do pixel foi adicionado um addEventListener para pegar o click no pixel que o usuário quer pintar;
+// 4- Capturei a cor selecionada (que está com a className "selected");
+// 5- no index do pixel percorrido, alterei o fundo pelo fundo da cor selecionada.
+const paintPixelBoard = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].addEventListener('click', () => {
+      const selected = document.querySelector('.selected');
+      pixels[index].style.backgroundColor = selected.style.backgroundColor;
+    });
+  }
+};
+
 window.onload = () => {
   generatePaleteColor();
   paintPaleteLocalStorage();
   generatePixelBoard();
   selectedColor();
+  paintPixelBoard();
 };
