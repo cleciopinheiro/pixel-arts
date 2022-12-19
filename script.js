@@ -1,5 +1,6 @@
 const sectionPaleteColor = document.querySelector('#color-palette');
 const buttonRandomColor = document.querySelector('#button-random-color');
+const clearButton = document.querySelector('#clear-board');
 
 // A função generatePaleteColor é responsável por criar tag div de forma dinâmica pelo JavaScript.
 // 1- Primeiro passo foi fazer um for para repitir a quantidade de div que foi pedida no requisito.
@@ -136,10 +137,25 @@ const paintPixelBoard = () => {
   }
 };
 
+// A função clearPixelBoard é responsável por limpar o Pixel Board por completo. A lógica é parecida com as funções paintPixelBoard e selectedColor:
+// 1- captuei os pixels;
+// 2- Criei um for para percorrer todos os pixels;
+// 3- Criei um addEventListener para ficar na espera do click do usuário no botão Limpar;
+// 4- Após o click cada pixel retorna para o seu background inicial que é branco.
+const clearPixelBoard = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    clearButton.addEventListener('click', () => {
+      pixels[index].style.backgroundColor = 'white';
+    });
+  }
+};
+
 window.onload = () => {
   generatePaleteColor();
   paintPaleteLocalStorage();
   generatePixelBoard();
   selectedColor();
   paintPixelBoard();
+  clearPixelBoard();
 };
