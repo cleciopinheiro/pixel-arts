@@ -121,22 +121,60 @@ const selectedColor = () => {
   }
 };
 
+// A função saveDrawing é responsável por salvar as cores geradas para os pixel. A lógica foi a seguinte:
+// 1- Capturei as className "pixel";
+// 2- criei uma array vazia para colocar os index das div percorrida no for;
+// 3- Uma vez com os index das div, utilizei o push para empurra-los para a array vazia (dentro do push peguei de forma direta somente o fundo dessas div para serem salvas);
+// 4- Com as informações, fiz um setItem no localStorage com o nome da chave de 'pixelBoard' como pedido no requisito e utilizei o JSON.stringify para converter para string o valor.
+const saveDrawing = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  const colorsPixel = [];
+
+  for (let index = 0; index < pixels.length; index += 1) {
+    colorsPixel.push(pixels[index].style.backgroundColor);
+    localStorage.setItem('pixelBoard', JSON.stringify(colorsPixel));
+  }
+};
+
 // A função paintPixelBoard serve para pintar os pixels criados com a cor selecionada na Paleta de Cores. A lógica utilizada na função é bastante parecida com a função selectedColor, porém ao invés de "capturar o click e pegar a cor" o addEventListener foi utilizado para aplicar o backgroundColor da cor que está selecionada da função selectedColor.
 // 1- Capturei os pixels criados;
 // 2- Passei um for para percorrer todos os meus pixels;
 // 3- com o index do pixel foi adicionado um addEventListener para pegar o click no pixel que o usuário quer pintar;
 // 4- Capturei a cor selecionada (que está com a className "selected");
-// 5- no index do pixel percorrido, alterei o fundo pelo fundo da cor selecionada.
+// 5- no index do pixel percorrido, alterei o fundo pelo fundo da cor selecionada;
+// 6- Salvei na função saveDraw tudo que ocorreu na função paintPixelBoard.
 const paintPixelBoard = () => {
   const pixels = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].addEventListener('click', () => {
       const selected = document.querySelector('.selected');
       pixels[index].style.backgroundColor = selected.style.backgroundColor;
+      saveDrawing();
     });
   }
 };
 
+// A função getDrawing é responsável por "pegar" o desenho que está no localStorage (os pixels que foram pintados e estão salvos no localStorage pela função saveDrawing). A lógica pra ser feita essa função é bem parecida com a da função paintPaleteColorSaved:
+// 1- Capturei as className "pixel";
+// 2- Peguei as informações do valor da chave "pixelBoard" e fiz um JSON.parse() para transformá-la novamente;
+// 3- Foi feito um for para poder percorrer a array que foi salva no localStorage;
+// 4- com os index na mão coloquei o valor capturado no localStorage em cada index da array.
+const getDrawing = () => {
+  const pixel = document.querySelectorAll('.pixel');
+  const savedPixel = JSON.parse(localStorage.getItem('pixelBoard'));
+  for (let index = 0; index < pixel.length; index += 1) {
+    pixel[index].style.backgroundColor = savedPixel[index];
+  }
+};
+
+// A função getPixelLocalStorage foi feita para o refresh da página ou caso ela seja fechada e a lógica foi pensada da seguinte forma: Ele vai tentar buscar alguma informação no localStorage, porém se caso não tenha nada, ou seja, nulo, ele vai utilizar a função paintPixelBoard que vai pintar as div. Se caso tenha alguma informação ele vai pegar a informação e utilizá-la.
+const getPixelLocalStorage = () => {
+  if (localStorage.getItem('pixelBoard') === null) {
+    paintPixelBoard();
+  } else {
+    getDrawing();
+  }
+};
 // A função clearPixelBoard é responsável por limpar o Pixel Board por completo. A lógica é parecida com as funções paintPixelBoard e selectedColor:
 // 1- captuei os pixels;
 // 2- Criei um for para percorrer todos os pixels;
@@ -151,6 +189,7 @@ const clearPixelBoard = () => {
   }
 };
 
+// No window.onload fiz a chamada de todas as funções.
 window.onload = () => {
   generatePaleteColor();
   paintPaleteLocalStorage();
@@ -158,4 +197,5 @@ window.onload = () => {
   selectedColor();
   paintPixelBoard();
   clearPixelBoard();
+  getPixelLocalStorage();
 };
