@@ -15,11 +15,14 @@
     "mochawesome-merge": "4.0.0",
     "mochawesome-report-generator": "4.1.0"
   },
+  "homepage": "https://cleciopinheiro.github.io/pixels-arts",
   "scripts": {
     "test": "cypress run",
     "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json .",
     "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "eslint-config-trybe-fundamentals": "1.1.0"
