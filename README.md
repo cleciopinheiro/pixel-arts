@@ -21,4 +21,4 @@ Para executar o projeto faça o clone deste repositório usando o comando abaixo
     git clone git@github.com:cleciopinheiro/pixel-arts.git
 ---
  
-Desenvolvido por [Clécio Pinheiro](www.linkedin.com/in/cleciopinheirodev), © 2022.
+Desenvolvido por [Clécio Pinheiro](https://www.linkedin.com/in/cleciopinheirodev), © 2022.
